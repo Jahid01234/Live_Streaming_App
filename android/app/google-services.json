@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "960755364731",
+    "project_id": "live-streaming-app-162ae",
+    "storage_bucket": "live-streaming-app-162ae.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:960755364731:android:447b840e4db833f131c3de",
+        "android_client_info": {
+          "package_name": "com.example.live_streaming_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXTkkZNj08G4gp1GM_fJ2D3ylgl3agCmo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
