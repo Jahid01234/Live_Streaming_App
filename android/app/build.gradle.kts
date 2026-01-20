@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.example.live_streaming_app"
-    compileSdk = 33
+    compileSdk = 36
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
