@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:live_streaming_app/core/routes/routes.dart';
+import 'package:live_streaming_app/features/home/model/user_model.dart';
 
 class RegisterController extends GetxController{
 
@@ -17,6 +18,8 @@ class RegisterController extends GetxController{
   void togglePasswordVisibility() {
     isPasswordHidden.value = !isPasswordHidden.value;
   }
+
+
 
 
 
@@ -55,13 +58,17 @@ class RegisterController extends GetxController{
       final user = userCredential.user;
 
       if (user != null) {
+
+        final userModel = UserModel(
+          uid: user.uid,
+          userName: userName,
+          email: email,
+          profileImage: '',
+          createdAt: DateTime.now(),
+        );
+
         // ✅ Save user info to Firestore
-        await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
-          'uid': user.uid,
-          'userName': userName,
-          'email': email,
-          'createdAt': DateTime.now()
-        });
+        await FirebaseFirestore.instance.collection('users').doc(user.uid).set(userModel.toMap());
 
         EasyLoading.showSuccess("User created & saved successfully!");
         // Go to create bio screen......
@@ -86,7 +93,6 @@ class RegisterController extends GetxController{
       }
     } catch (e) {
       EasyLoading.dismiss();
-      EasyLoading.showError(e.toString());
     }
   }
 

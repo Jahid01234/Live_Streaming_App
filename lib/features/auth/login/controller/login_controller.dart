@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:live_streaming_app/core/routes/routes.dart';
 
 class LoginController extends GetxController{
   final TextEditingController emailController = TextEditingController();
@@ -33,8 +34,11 @@ class LoginController extends GetxController{
     try {
       EasyLoading.show(status: "Loading...");
 
-      final UserCredential userCredential = await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password);
+      final UserCredential userCredential =
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: email,
+          password: password,
+      );
 
       final user = userCredential.user;
 
@@ -47,7 +51,7 @@ class LoginController extends GetxController{
         if (!docSnapshot.exists) {
           EasyLoading.dismiss();
           EasyLoading.showError("User info not found. Please sign up first.");
-          //Get.offAllNamed(AppRoutes.register);
+          Get.offAllNamed(AppRoutes.register);
           return;
         }
         // ✅ Successful login
@@ -58,7 +62,7 @@ class LoginController extends GetxController{
         passwordController.clear();
 
         // 👉 Go to home
-        //Get.to(()=> BottomNavBarScreen());
+        Get.toNamed(AppRoutes.home);
       }
     } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
@@ -73,7 +77,6 @@ class LoginController extends GetxController{
       } else {
         EasyLoading.showError(e.message ?? "Login failed.");
       }
-
     } catch (e) {
       EasyLoading.dismiss();
     }

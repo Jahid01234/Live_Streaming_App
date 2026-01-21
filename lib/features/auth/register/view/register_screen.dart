@@ -79,7 +79,7 @@ class RegisterScreen extends StatelessWidget {
                 text: "Register",
                 textColor: AppColors.white,
                 onTap: () {
-
+                  controller.createAccount();
                 },
               ),
               SizedBox(height: getHeight(60)),

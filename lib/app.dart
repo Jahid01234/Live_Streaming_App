@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:live_streaming_app/core/const/app_size.dart';
 import 'package:live_streaming_app/core/routes/routes.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white
       ),
+      builder: EasyLoading.init(),
       initialRoute: AppRoutes.splash,
       getPages: AppRoutes.routes,
     );

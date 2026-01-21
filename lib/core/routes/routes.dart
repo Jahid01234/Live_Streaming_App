@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:live_streaming_app/features/auth/login/view/login_screen.dart';
 import 'package:live_streaming_app/features/auth/register/view/register_screen.dart';
+import 'package:live_streaming_app/features/home/view/home_screen.dart';
 import 'package:live_streaming_app/features/splash/view/splash_screen.dart';
 
 class AppRoutes {
@@ -8,6 +9,7 @@ class AppRoutes {
   static const String splash = '/splash';
   static const String register = '/register';
   static const String login = '/login';
+  static const String home = '/home';
 
 
 
@@ -26,6 +28,11 @@ class AppRoutes {
     GetPage(
       name: register,
       page: ()=> RegisterScreen(),
+      transition: Transition.leftToRight,
+    ),
+    GetPage(
+      name: home,
+      page: ()=> HomeScreen(),
       transition: Transition.leftToRight,
     ),
 
