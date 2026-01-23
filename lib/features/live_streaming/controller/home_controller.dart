@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:live_streaming_app/core/routes/routes.dart';
-import 'package:live_streaming_app/features/home/model/user_model.dart';
+import 'package:live_streaming_app/features/live_streaming/model/user_model.dart';
+import 'package:live_streaming_app/features/live_streaming/view/live_streaming_screen.dart';
+
 
 class HomeController extends GetxController{
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -53,6 +56,40 @@ class HomeController extends GetxController{
   }
 
 
+  // start live streaming...............
+  Future<void> startLiveStreaming() async {
+    final currentUser = _auth.currentUser!;
+    final liveId = "${currentUserId}_${DateTime.now().microsecondsSinceEpoch}";
+
+    await updateLiveStatus(currentUserId, true, liveId);
+
+    await Get.to(() => LiveStreamingScreen(
+      userId: currentUserId,
+      userName: currentUser.displayName ?? "Host",
+      isHost: true,
+      liveId: liveId,
+      hostName: currentUser.displayName ?? "Host",
+    ));
+
+    await updateLiveStatus(currentUserId, false, null);
+  }
 
 
+  // user onTap..................
+  void handleUserOnTap(UserModel user){
+    if(user.isLive && user.liveId != null){
+      // join live stream as audience..
+      Get.to(()=> LiveStreamingScreen(
+          userId: currentUserId,
+          userName: _auth.currentUser!.displayName ?? "Audience",
+          isHost: false,
+          liveId: user.liveId!,
+          hostName: user.userName,
+        )
+      );
+    } else{
+      // user is not live...
+      EasyLoading.showError("${user.userName} is not live right now." );
+    }
+  }
 }

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:live_streaming_app/core/style/global_text_style.dart';
-import 'package:live_streaming_app/features/home/controller/home_controller.dart';
-import 'package:live_streaming_app/features/home/model/user_model.dart';
-import 'package:live_streaming_app/features/home/view/widgets/user_card.dart';
+import 'package:live_streaming_app/features/live_streaming/controller/home_controller.dart';
+import 'package:live_streaming_app/features/live_streaming/model/user_model.dart';
+import 'package:live_streaming_app/features/live_streaming/view/widgets/user_card.dart';
+
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         title: Text(
-          "Home ",
+          "Live Streaming",
           style: globalTextStyle(
             color: Colors.grey,
             fontSize: 20,
@@ -49,6 +50,12 @@ class HomeScreen extends StatelessWidget {
                 return Center(child: Text("No users available."));
               }
               List<UserModel> users = snapshot.data!;
+              users.sort((a,b){
+                if(a.isLive && !b.isLive) return -1;
+                if(!a.isLive && b.isLive) return -1;
+                return 0;
+              });
+
               return GridView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: users.length,
@@ -62,13 +69,27 @@ class HomeScreen extends StatelessWidget {
                    final user = users[index];
                    return UserCard(
                        user: user,
-                       onTap: (){},
-                   );
+                       onTap: (){
+                         controller.handleUserOnTap(user);
+                       },
+                    );
                   },
               );
             },
         ),
-      )
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+          elevation: 0,
+          backgroundColor: Colors.blueAccent,
+          onPressed: ()=>controller.startLiveStreaming(),
+          icon: Icon(Icons.videocam,
+            color: Colors.white,
+          ),
+          label: Text(
+            "Go Live",
+            style: globalTextStyle(color: Colors.white),
+          ),
+      ),
     );
   }
 }

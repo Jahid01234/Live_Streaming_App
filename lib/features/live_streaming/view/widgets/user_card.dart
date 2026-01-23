@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:live_streaming_app/core/style/global_text_style.dart';
-import 'package:live_streaming_app/features/home/model/user_model.dart';
+import 'package:live_streaming_app/features/live_streaming/model/user_model.dart';
+
 
 class UserCard extends StatelessWidget {
   final UserModel user;

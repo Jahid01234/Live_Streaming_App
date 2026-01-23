@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:live_streaming_app/core/routes/routes.dart';
-import 'package:live_streaming_app/features/home/model/user_model.dart';
+import 'package:live_streaming_app/features/live_streaming/model/user_model.dart';
 
 class RegisterController extends GetxController{
 

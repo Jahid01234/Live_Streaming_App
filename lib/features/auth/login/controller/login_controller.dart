@@ -61,7 +61,7 @@ class LoginController extends GetxController{
         emailController.clear();
         passwordController.clear();
 
-        // 👉 Go to home
+        // 👉 Go to live_streaming
         Get.toNamed(AppRoutes.home);
       }
     } on FirebaseAuthException catch (e) {
