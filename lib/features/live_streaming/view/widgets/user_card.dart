@@ -19,13 +19,13 @@ class UserCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         elevation: 0,
+        margin: EdgeInsets.only(bottom: 20),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            /// IMAGE / FIRST LETTER
             Expanded(
               child: Stack(
                 children: [
@@ -90,7 +90,6 @@ class UserCard extends StatelessWidget {
               ),
             ),
 
-            /// NAME (BOTTOM)
             Padding(
               padding: const EdgeInsets.all(8),
               child: Text(

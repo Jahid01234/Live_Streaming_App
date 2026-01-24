@@ -15,30 +15,26 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.teal,
         automaticallyImplyLeading: false,
-        forceMaterialTransparency: true,
+        centerTitle: true,
         title: Text(
           "Live Streaming",
           style: globalTextStyle(
-            color: Colors.grey,
+            color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
         ),
-        centerTitle: true,
         actions: [
           IconButton(
               onPressed: ()=> controller.logout(),
-              icon: Icon(Icons.logout,size: 20),
+              icon: Icon(Icons.logout,color: Colors.white,size: 20),
           )
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(
-          top: 20,
-          left: 15,
-          right: 15,
-        ),
+        padding: const EdgeInsets.only(top: 10,left: 15, right: 15),
         child: StreamBuilder(
             stream: controller.getUsersStream(),
             builder: (context,snapshot){
@@ -49,6 +45,7 @@ class HomeScreen extends StatelessWidget {
               if(!snapshot.hasData || snapshot.data!.isEmpty){
                 return Center(child: Text("No users available."));
               }
+
               List<UserModel> users = snapshot.data!;
               users.sort((a,b){
                 if(a.isLive && !b.isLive) return -1;
@@ -59,10 +56,9 @@ class HomeScreen extends StatelessWidget {
               return GridView.builder(
                 scrollDirection: Axis.vertical,
                 itemCount: users.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      //mainAxisExtent: 12,
+                      crossAxisSpacing: 20,
                       childAspectRatio: 0.78
                   ),
                   itemBuilder: (context, index){
@@ -80,9 +76,10 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
           elevation: 0,
-          backgroundColor: Colors.blueAccent,
+          backgroundColor: Colors.teal,
           onPressed: ()=>controller.startLiveStreaming(),
-          icon: Icon(Icons.videocam,
+          icon: Icon(
+            Icons.videocam,
             color: Colors.white,
           ),
           label: Text(

@@ -21,8 +21,6 @@ class RegisterController extends GetxController{
 
 
 
-
-
   // sign up method........
   Future<void> createAccount() async {
     final userName = userNameController.text.trim();
