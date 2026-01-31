@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
               List<UserModel> users = snapshot.data!;
               users.sort((a,b){
                 if(a.isLive && !b.isLive) return -1;
-                if(!a.isLive && b.isLive) return -1;
+                if(!a.isLive && b.isLive) return 1;
                 return 0;
               });
 
